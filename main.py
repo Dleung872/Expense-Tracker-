@@ -2,11 +2,11 @@ from time import sleep
 
 expenses = []
 
-def add(name, amount):
+def add(item, amount):
     expenses.append(
         {
-        "item": name,
-        "amount": amount
+            'item': item,
+            'amount': amount
         }
     )
 
@@ -19,7 +19,7 @@ def main():
                 user_expense = input('amount: ')
                 add(user_item, user_expense)
                 print(expenses)
-                sleep(5)
+                sleep(3)
                 print('\033c')
                 continue
         
