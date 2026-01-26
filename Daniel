@@ -1,0 +1,46 @@
+import os
+from datetime import datetime
+expense_categories = set()
+
+
+def category_making():
+    category = input("Create a new expense category: ")
+    expense_categories.add(category)
+
+def expenses():
+
+def expense_calculation():
+
+def categories():
+    while True:
+        category_making()
+        more_categories = input("Do you want to make a new category (yes/no): ").lower()
+
+        if more_categories == "yes":
+            continue
+        elif more_categories == "no":
+            break
+        else:
+            print("Invalid choice. Please enter yes or no.")
+def menu():
+   print("\nMenu:") 
+   print("1. Make/remove categories")
+   print("2. Add/remove expenses")
+   print("3. View total expenses")
+choice = input("Choose an option: (1/2/3)")
+if choice == "1":
+   categories()
+elif choice == "2":
+
+menu()
+
+
+categories()
+print("Your categories:", expense_categories)
+
+
+more_categories = input("Do you want to make a new category(yes/no)")
+if more_categories == "yes":
+    category_making()
+if more_categories == "no":
+    menu()
