@@ -1,0 +1,74 @@
+import os
+from datetime import datetime
+expense_categories = {}
+
+def categories(): # Option 1 - making and removing categories
+    while True:
+        more_categories = input("Do you want to make a new category (yes/no): ").lower()
+
+        if more_categories == "yes":
+            category_making()
+        elif more_categories == "no":
+            menu()
+        else:
+            print("Invalid choice. Please enter yes or no.")
+
+
+def category_making():      
+    category = input("Create a new expense category: ").strip()
+
+    if category not in expense_categories:
+        expense_categories[category] = []
+    else:
+        print("Category already exists.")
+    print(expense_categories)
+
+
+def expenses():  # Option 2. Adding and removing excpenses
+ expense_name = input("Enter expense: ")
+ expense_amount = int(input("Enter the expese amount ($) "))
+ expense_date = input("Enter a date (YYYY/MM/DD):")
+ try:
+    valid_date = datetime.strptime(expense_date, "%Y/%m/%d")
+    print("Valid date!")
+ except ValueError:
+    print("Invalid date. Please use YYYY/MM/DD.")
+ expense = (expense_name, expense_amount,expense_date)
+ print("Available categories:", list(expense_categories.keys()))
+ category = input("Which category is your expense in? ").strip()
+ 
+ if category in expense_categories:
+  expense_categories[category].append(expense)
+  print("expense added!")
+  print(expense_categories)
+ else:
+  print("That category does not exist.")
+
+
+def expense_calculation(): # Option 3 (Max can handle this)
+   print("placeholder")
+
+
+
+
+def menu():
+  
+   print("\nMenu:") 
+   print("1. Make/remove categories")
+   print("2. Add/remove expenses")
+   print("3. View total expenses")
+   print("4. Exit")
+   while True:
+    choice = input("Choose an option: (1/2/3/4)")
+    if choice == "1":
+      categories()
+    elif choice == "2":
+      expenses()
+    elif choice == "3":
+      expense_calculation()
+    elif choice == "4":
+      print("Exited")
+      exit()
+    else:
+      print("Invalid choice")
+menu()   
