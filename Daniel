@@ -1,46 +1,116 @@
 import os
 from datetime import datetime
+from time import sleep
+
 expense_categories = set()
+expenses = [
+    {
+       'item': 'Hi im first! Apple orANGES/474875225allan zukerbiurg',
+       'amount': '3.1415926535897932384626433832795028841971'
+    },
+        {
+       'item': 'i am second, six seven allan zukerb145145iurg',
+       'amount': '3.1415926535897932384626433832795028841971'
+    },
+            {
+       'item': 'i am third, idk kill epstein allan zu145145145kerbiurg',
+       'amount': '3.1415926535897932384626433832795028841971'
+    },
+        {
+       'item': 'fourth, aaaaaallan z14622362366ukerbiurg',
+       'amount': '3.1415926535897932384626433832795028841971'
+    },
+        {
+       'item': 'last. daeth.allan zuk89999999erbiurg',
+       'amount': '3.1415926535897932384626433832795028841971'
+    }
 
+]
 
-def category_making():
-    category = input("Create a new expense category: ")
+def category_making(): #makes a category
+    category = input("\nCreate a new expense category: ")
     expense_categories.add(category)
 
-def expenses():
+def category_delet(): #removeing category
+    for cats in expense_categories:
+        print(f'categories: {cats}')
+    user_cat_remove = input('pick one to remove: ')
 
-def expense_calculation():
+def antidisestablishmentarianism(): #open the categories
+    for cats in expense_categories:
+         print(f'categories: {cats}') 
 
-def categories():
+def expense_to_category():  #putting the expenses into a category
+    for cats in expense_categories:
+        print(f'categories: {cats}') 
+    user_pick = input('pick one to add expense: ')
+            
+def add_expenses(item, amount):
+    expenses.append(
+        {
+            'item': item,
+            'amount': amount
+        }
+    )
+
+def add_number_check():
+    user_item = input('\nitem: ')
     while True:
-        category_making()
-        more_categories = input("Do you want to make a new category (yes/no): ").lower()
-
-        if more_categories == "yes":
-            continue
-        elif more_categories == "no":
+        user_expense = (input('amount: '))
+        try:
+            user_expense = float(user_expense)
             break
-        else:
-            print("Invalid choice. Please enter yes or no.")
-def menu():
-   print("\nMenu:") 
-   print("1. Make/remove categories")
-   print("2. Add/remove expenses")
-   print("3. View total expenses")
-choice = input("Choose an option: (1/2/3)")
-if choice == "1":
-   categories()
-elif choice == "2":
-
-menu()
-
-
-categories()
-print("Your categories:", expense_categories)
+        except:
+            print("input numberic amount")
+            continue
+    add_expenses(user_item, user_expense)
+    print(expenses)
+    sleep(1)
+    print('\033c')
+    
+def remove_expenses():
+    for index, item in enumerate(expenses):
+        print(f"{index+1}. {item["item"]}")
+    user_removal = int(input('\nwhich number item would you like to remove?: '))
+    expenses.pop(user_removal-1)
 
 
-more_categories = input("Do you want to make a new category(yes/no)")
-if more_categories == "yes":
-    category_making()
-if more_categories == "no":
-    menu()
+# def expense_calculation():
+
+            
+            
+def main():
+    while True:
+        print("\nMenu:") 
+        print("1. create category")
+        print("2. remove category")
+        print("3. open category")
+        choice = input("Choose an option: (1/2/3/4)\n>")
+        
+        if choice == "1":
+            category_making()
+           
+        elif choice == '2':
+                if len(expense_categories) == 0:
+                    input('you have no catergory\npress Enter to continue')
+                    print('\033c')
+                    continue
+                else:
+                    category_delet() 
+                    
+        elif choice == '3':
+            antidisestablishmentarianism()
+        # elif choice == "2":
+        #     expense_to_category()
+        #     add_number_check()
+            
+        # elif choice == '3':
+        #     remove_expenses()
+        
+        # elif choice == '4':
+        #     for index, item in enumerate(expenses):
+        #         print(f"{index+1}. {item["item"]}")
+        #     input('press ENTER to continue')
+        #     print('\033c')
+
+main()
