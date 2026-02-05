@@ -1,0 +1,68 @@
+from time import sleep
+
+expenses = []
+
+
+def add(item, amount):
+    expenses.append(
+        {
+            'item': item,
+            'amount': amount
+        }
+    )
+
+
+def calculate_total_expenses():
+    """
+    Calculate and return the total amount of all expenses.
+    """
+    total = 0.0
+
+    for expense in expenses:
+        try:
+            total += float(expense['amount'])
+        except ValueError:
+            print("Invalid amount skipped:", expense)
+
+    return total
+
+
+def main():
+    while True:
+        print('1. add\n2. see list\n3. calculate total\n4. exit')
+        user_input = input("> ")
+
+        if user_input == '1' or user_input == 'add':
+            user_item = input('item: ')
+            user_expense = input('amount: ')
+            add(user_item, user_expense)
+            print("Expense added!")
+            sleep(1)
+            print('\033c')
+
+        elif user_input == '2' or user_input == 'see list':
+            print("Expense List:")
+            for expense in expenses:
+                print(f"- {expense['item']}: ${expense['amount']}")
+            sleep(3)
+            print('\033c')
+
+        elif user_input == '3' or user_input == 'calculate':
+            total = calculate_total_expenses()
+            print(f"Total Expenses: ${total:.2f}")
+            sleep(3)
+            print('\033c')
+
+        elif user_input == '4' or user_input == 'exit':
+            print('bye')
+            sleep(0.5)
+            print('\033c')
+            return
+
+        else:
+            print("Invalid option")
+            sleep(1)
+            print('\033c')
+
+
+main()
