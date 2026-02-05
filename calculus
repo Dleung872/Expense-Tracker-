@@ -1,0 +1,9 @@
+def calculate_total_by_category(expenses):
+    """Returns a dictionary with totals per category."""
+    category_totals = {}
+    for expense in expenses:
+        category = expense.get('category')
+        amount = expense.get('amount', 0)
+        if isinstance(amount, (int, float)):
+            category_totals[category] = category_totals.get(category, 0) + amount
+    return {cat: round(amt, 2) for cat, amt in category_totals.items()}
