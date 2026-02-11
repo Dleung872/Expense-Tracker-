@@ -1,5 +1,5 @@
 # Expense-Tracker 
 #member roles: 
-Daniel - 
-Aaron - 
-Max - 
+Daniel - Adding expenses
+Aaron - removing expenses
+Max - Calculations
