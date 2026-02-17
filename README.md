@@ -19,3 +19,25 @@ Challenges we faced while working on this project:
 2. Skill level and Coding styles - Every member of the group has different ways of coding, causing some conflicts as we struggle to adapt and understand each others code, with difficulty communicating, linking all of our code together becomes a challenge. All of us are also at different levels in our coding journey, with some of us being more experienced than others. When working as a group, people with less experience needs more time, which can slow down our pace to finishing the project. We overcame our understanding challenge by enhancing the quality of our explainations, so everyone can understand the code more easily.
 
 Our group semi-enjoys collaborative coding.  We enjoy the aspect of having more people to work on the project, as it boosts effieceny, and splits the work load significantly. However, we struggle with the fact that strong communication is needed to work on the program more efficiently, as well as a higher quality project.
+
+#How to use
+open the ?????? file, and copy and paste the code into vscode, when running the code, a menu will pop up.
+the menu choices include:
+1. add/revmove categories
+   a. a choice will pop up with a choice to add or remove, input 1 for add and 2 for remove
+   a yes/no confimation will pop up
+   adding categories: Create a new expense category, once you make one, a prompt will ask if you want to make more.
+   if chosen the make more option, steps repeat.
+   removing categories: -- Aaron
+   
+2. add/remove expenses
+   same with adding, a 1 or 2 choice will show will 1 being adding and 2 being removing
+   a yes/no confirmation will also appear.
+   adding expenses:
+   Once expense is made, you will be asked for its date using YYYY/MM/DD format, as well as sort it into an existing category
+   Once expense is made, the menu will return.
+   removing expenses: -- Aaron
+   
+5. Calculate total expenses
+   --Max 
+7. exit the program
