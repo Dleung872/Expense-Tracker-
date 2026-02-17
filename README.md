@@ -21,7 +21,7 @@ Challenges we faced while working on this project:
 Our group semi-enjoys collaborative coding.  We enjoy the aspect of having more people to work on the project, as it boosts effieceny, and splits the work load significantly. However, we struggle with the fact that strong communication is needed to work on the program more efficiently, as well as a higher quality project.
 
 #How to use
-open the ?????? file, and copy and paste the code into vscode, when running the code, a menu will pop up.
+open the expensetracker.final file, and copy and paste the code into vscode, when running the code, a menu will pop up.
 the menu choices include:
 1. add/revmove categories
    a. a choice will pop up with a choice to add or remove, input 1 for add and 2 for remove
