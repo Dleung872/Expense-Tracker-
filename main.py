@@ -2,82 +2,59 @@ import os
 from datetime import datetime
 from time import sleep
 
-expense_categories = set(["thing", "another"])
+expense_categories = set([])
 expenses = [
-    {
-       'item': 'Hi im first! Apple orANGES/474875225allan zukerbiurg',
-       'amount': '3.1415926535897932384626433832795028841971',
-       'category': ''
-    },
-        {
-       'item': 'i am second, six seven allan zukerb145145iurg',
-       'amount': '3.1415926535897932384626433832795028841971',
-       'category': ''
-    },
-            {
-       'item': 'i am third, idk kill epstein allan zu145145145kerbiurg',
-       'amount': '3.1415926535897932384626433832795028841971',
-       'category': ''
-    },
-        {
-       'item': 'fourth, aaaaaallan z14622362366ukerbiurg',
-       'amount': '3.1415926535897932384626433832795028841971',
-       'category': ''
-    },
-        {
-       'item': 'last. daeth.allan zuk89999999erbiurg',
-       'amount': '3.1415926535897932384626433832795028841971',
-       'category': ''
-    }
 
 ]
-
+#input 1
 def category_making(): #makes a category
-    category = input("\nCreate a new expense category: ")
+    category = input("Create a new expense category: ")
     expense_categories.add(category)
     print('category added')
     sleep(1)
     print("\033c")
-
+    
+#input 2
 def category_delet(): #removeing category
-    for cats in expense_categories:
-        print(f'categories: {cats}')
-    user_cat_remove = input('pick one to remove: ')
-    if user_cat_remove != cats in expense_categories:
-        print('\nthis category does not exist')
-        input('press Enter to continue')
+    cat_list = sorted(list(expense_categories))
+    for id, cats in enumerate(cat_list):
+        print(f'{id+1}. {cats}')
+    user_cat_removal = int(input('which category id to remove: '))
+    cat_actual_name = cat_list[user_cat_removal-1]
+    expense_categories.remove(cat_actual_name)
+    sleep(1)
+    print('\033c')
+    
+#input 3
+def open_category(): #open the categories
+    cat_list = sorted(list(expense_categories))
+    if len(cat_list) == 0:
+        print('you have no categories')
+        input('press ENTER to continue')
         print('\033c')
-    else:
-        expense_categories.remove(user_cat_remove)
-        print('removed')
+        return
+    for id, cats in enumerate(cat_list):
+        print(f'{id+1}. {cats}')
+    user_open_cats = int(input('which category would you like to open\n> '))
+    print('\033c')
+    
+    filtered_exp = []
+    for exp in expenses:
+        if exp["category"] == cat_list[user_open_cats-1]:
+            filtered_exp.append(exp)
+            
+    if len(filtered_exp) == 0:
+        print('you got nothing in here')
         sleep(1)
         print('\033c')
-
-def antidisestablishmentarianism(): #open the categories
-    for cats in expense_categories:
-         print(f'categories: {cats}')
-    user_open_cats = input('which category would you like to open\n> ')
-    for exp in expenses:
-        if exp["category"] == user_open_cats:
-            print(f"- {exp["item"]}")
-
-
-def expense_to_category():  #putting the expenses into a category
-    for id, exp in enumerate(expenses):
-        print(f"{id+1}, {exp["item"]}")
-    uin = input("what u want brochacho> ")
-    target_expense = expenses[int(uin)-1]
-    
-    #print("USER CHOSE THIS : >>>>>>>>" + target_expense["item"])
-    
-    print("Available Categories:")
-    for cats in expense_categories:
-        print(f'- {cats}') 
-    user_pick = input('pick one to add expense: ')
-    target_expense["category"] = user_pick
-    
-    
+        
+    else:
+        for exp in filtered_exp:
+            print(f"{exp['item']}: {exp['amount']}")
+            input('\npress ENTER to continue')
+            print('\033c')
             
+#input 4        
 def add_expenses(item, amount):
     expenses.append(
         {
@@ -86,7 +63,7 @@ def add_expenses(item, amount):
             'category': ''
         }
     )
-
+    
 def add_number_check():
     user_item = input('\nitem: ')
     while True:
@@ -94,35 +71,66 @@ def add_number_check():
         try:
             user_expense = float(user_expense)
             break
-        except:
+        except:          
             print("input numberic amount")
             continue
     add_expenses(user_item, user_expense)
-    print(expenses)
+    for item in expenses:
+        print(f'{item}')
+    sleep(1)
+    print('\033c')
+
+def expense_to_category():  #putting the expenses into a category
+    for id, object in enumerate(expenses):
+        print(f'{id+1}. {object}')
+    user_item_choice = int(input('pick expense id to add to a category: '))
+    the_item = expenses[user_item_choice-1]
+    cat_list = sorted(list(expense_categories))
+    for id, cats in enumerate(cat_list):
+        print(f'{id+1}. {cats}')
+    user_cat_choice = int(input('add to which category: '))
+    the_item['category'] = cat_list[user_cat_choice-1]
+    sleep(2)
+    print('\033c')
+
+#input 5
+def remove_expenses():
+    cat_list = sorted(list(expense_categories))
+    for id, cats in enumerate(cat_list):
+        print(f'{id+1}. {cats}')
+    user_cat_choice = int(input('remove from which category: '))
+    print('')
+    
+    list_filter = []
+    for id, object in enumerate(expenses):
+        if object['category'] == cat_list[user_cat_choice-1]:
+            list_filter.append(object)
+            
+    for id, object in enumerate(list_filter):
+        print(f'{id+1}. {object}')
+        
+    user_item_choice = int(input('pick expense id to remove from a category: '))
+    the_item = list_filter[user_item_choice-1]
+    the_item['category'] = ""
     sleep(1)
     print('\033c')
     
-def remove_expenses():
-    for index, item in enumerate(expenses):
-        print(f"{index+1}. {item["item"]}")
-    user_removal = int(input('\nwhich number item would you like to remove?: '))
-    expenses.pop(user_removal-1)
-
-
-# def expense_calculation():
-
-            
-            
+#main funtion
 def main():
     while True:
         print("Menu:") 
+        print("----------categories----------")
         print("1. create category")
         print("2. remove category")
         print("3. open category")
-        print("4. assign category to an item")
+        print("----------items----------")
+        print("4. add item")
+        print('5. remove item')
+        print("--------------------------")
         choice = input("Choose an option: (1/2/3/4)\n> ")
         
         if choice == "1":
+            print('\033c')
             category_making()
            
         elif choice == '2':
@@ -135,21 +143,15 @@ def main():
                     category_delet() 
                     
         elif choice == '3':
-            antidisestablishmentarianism()
+            print('\033c')
+            open_category()
             
         elif choice == '4':
+            add_number_check()
             expense_to_category()
-        # elif choice == "2":
-        #     expense_to_category()
-        #     add_number_check()
             
-        # elif choice == '3':
-        #     remove_expenses()
+        elif choice == '5':
+            print('\033c')
+            remove_expenses()
         
-        # elif choice == '4':
-        #     for index, item in enumerate(expenses):
-        #         print(f"{index+1}. {item["item"]}")
-        #     input('press ENTER to continue')
-        #     print('\033c')
-
 main()
