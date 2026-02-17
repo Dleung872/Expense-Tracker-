@@ -38,6 +38,7 @@ the menu choices include:
    Once expense is made, the menu will return.
    removing expenses: -- Aaron
    
-5. Calculate total expenses
-   --Max 
-7. exit the program
+3. Calculate total expenses
+   Pick the option, category expenses as well as total expenses will both be calculated.
+  
+4. exit the program
