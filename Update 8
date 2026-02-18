@@ -1,0 +1,183 @@
+import os
+from datetime import datetime
+import pickle
+
+expense_categories = {}
+
+def categories_choices():
+  print("\nMenu:") 
+  print("1. Make categories")   # Option 1. choices
+  print("2. remove categories")
+  while True:
+    category_option = input("Choose an option: (1/2)")
+    if category_option == "1":
+      categories_adding()
+    elif category_option == "2":
+      categories_removing()
+    else:
+      print("Invalid choice")
+
+
+def categories_adding(): # Option 1 - making categories
+    while True:
+        more_categories = input("Do you want to make a new category (yes/no): ").strip().lower() # asks the user if they want to make categories
+
+        if more_categories == "yes":
+            category_making()
+        elif more_categories == "no":
+            menu()
+        else:
+            print("Invalid choice. Please enter yes or no.") 
+
+def categories_removing(): # option 1. removing categories
+   while True:
+     less_categories = input("Do you want to remove a category (yes/no)").strip().lower()
+
+     if less_categories == "yes":
+        removing = input("Which category do you want to remove?").lower()
+        if removing in expense_categories:
+           expense_categories.pop(removing)
+           print(expense_categories)
+        else:
+           print("Category does not exist")    
+     elif less_categories == "no":
+        menu()
+     else:
+        print("Invalid choice,please print yes or no.")
+
+
+
+def expense_choices(): 
+   print("\nMenu:") 
+   print("1. add expenses")   # Option 2. choices 
+   print("2. remove expenses")
+
+   while True:
+    choice = input("Choose an option: (1/2)")
+    if choice == "1":
+      expenses_adding()
+    elif choice == "2":
+      expenses_removing()
+    else:
+      print("Invalid choice")
+
+
+
+def category_making():      
+    category = input("Create a new expense category: ").strip().lower()
+
+    if category not in expense_categories: 
+        os.system('clear')                  #Checks if the category exists or not, then sort the expenses
+        expense_categories[category] = []  
+    else:
+        os.system('clear')
+        print("Category already exists.")
+    print(expense_categories)
+
+
+def expenses_adding():  # Option 2. Adding expenses
+ expense_name = input("Enter expense: ").lower()
+ expense_amount = float(input("Enter the expese amount ($) ")) #asks for exepense, amount, and date
+ while True:
+  expense_date = input("Enter a date (YYYY/MM/DD):") # checks if date is valid, if not user will be asked to input date again
+  try:
+    datetime.strptime(expense_date, "%Y/%m/%d")
+    print("Valid date!")
+    break
+
+  except ValueError:
+    print("Invalid date. Please use YYYY/MM/DD.")
+    continue
+ global expense  
+ expense = f"{expense_name} - ${expense_amount:.2f} on {expense_date}"# sorts expense variables into a tuple for convenience
+ print("Available categories:", list(expense_categories.keys()))
+ category = input("Which category is your expense in? ").strip().lower() # asks the user to sort the expense into a category
+
+ if category in expense_categories:
+    expense_categories[category].append(expense)
+    os.system('clear')
+    print("Expense added!")
+    print(expense_categories)
+ else:
+    os.system('clear')
+    print("That category does not exist.")
+ menu()
+
+def expenses_removing():
+    expense_remove = input("Do you want to remove an expense (yes/no)? ").lower()
+
+    if expense_remove == "yes":
+        removing = float(input("Which expense do you want to remove? "))
+
+        for key, value in expense_categories.items():
+            if value == removing:
+                expense_categories[key] = 0
+
+        print("Updated expenses:", expense_categories)
+
+    elif expense_remove == "no":
+        menu()
+
+    else:
+        print("Invalid choice")
+
+
+
+
+def expense_calculation():
+    total = 0.0
+    category_totals = {}
+    for category, expenses in expense_categories.items():
+        cat_total = 0.0
+        for exp_str in expenses:
+            try:
+                parts = exp_str.split(' - $')
+                if len(parts) == 2:
+                    amount_part = parts[1].split(' on ')[0]   
+
+                    amount = float(amount_part)
+                    total += amount
+                    cat_total += amount
+            except (ValueError, IndexError):
+                print(f"Warning: could not parse: {exp_str}")
+        if cat_total > 0:
+            category_totals[category] = cat_total
+    os.system('clear')
+    print("\nExpense Summary:")
+    print(f"Total expenses: ${total:.2f}")
+    if category_totals:
+        print("\nPer Category:")
+        for cat, amt in category_totals.items():
+            print(f"  {cat}: ${amt:.2f}")
+    else:
+        print("No expenses recorded.")
+    input("\nPress Enter to return to main menu...")
+    menu()
+
+
+
+
+
+
+
+def menu():
+
+   print("\nMenu:") 
+   print("1. Make/remove categories")   # menu allows user to grow back and forth between tasks
+   print("2. Add/remove expenses")
+   print("3. View total expenses")
+   print("4. Exit")
+   while True:
+    choice = input("Choose an option: (1/2/3/4)")
+    if choice == "1":
+      categories_choices()
+    elif choice == "2":
+      expense_choices()
+    elif choice == "3":
+      expense_calculation()
+    elif choice == "4":
+      print("Exited")
+      exit()
+    else:
+      print("Invalid choice")
+menu() 
