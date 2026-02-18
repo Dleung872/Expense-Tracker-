@@ -123,7 +123,8 @@ def expense_calculation():
             try:
                 parts = exp_str.split(' - $')
                 if len(parts) == 2:
-                    amount_part = parts[1].split(' on ')[0]   # Note: the original English version uses " on "
+                    amount_part = parts[1].split(' on ')[0]   
+
                     amount = float(amount_part)
                     total += amount
                     cat_total += amount
